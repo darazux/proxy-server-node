@@ -5,6 +5,7 @@ const app = express();
 const PROXY_PORT = 5000;
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const rateLimit = require('express-rate-limit');
+require('dotenv').config();
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -19,7 +20,7 @@ app.get('/', (req, res) => {
 
 app.use('/corona-tracker-world-data', (req, res, next) => {
   createProxyMiddleware({
-    target: 'https://xxx.com',
+    target: process.env.BASE_API_URL_CORONA_WORLD,
     changeOrigin: true,
     pathRewrite: {
       [`^/corona-tracker-world-data`]: '',
