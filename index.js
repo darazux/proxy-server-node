@@ -2,7 +2,6 @@
 
 const express = require('express');
 const app = express();
-const PROXY_PORT = 5080;
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const rateLimit = require('express-rate-limit');
 require('dotenv').config();
@@ -40,6 +39,10 @@ app.use('/corona-tracker-world-data', (req, res, next) => {
   })(req, res, next);
 });
 
+const port = process.env.PORT || 5000;
+
 app.listen(PROXY_PORT, () => {
-  console.log(`Listening on localhost port ${PROXY_PORT}`);
+  console.log(`Listening on localhost port ${port}`);
 });
+
+module.exports = app;
