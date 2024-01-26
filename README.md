@@ -16,23 +16,19 @@ NodeJS の express と http-proxy-middleware パッケージを使用したア�
    style s1 stroke-dasharray: 5 5
    style s2 stroke-dasharray: 5 5
    style Proxy fill:#00f
-   
-   c1[Send HTTP Request]-->p1[Forward HTTP Request]
-   p1-->s1[Receive HTTP Request]
-   s1-->s2
-   s2[Send HTTP Response]-->p2[Foward HTTP Reponse]
-   p2-->c2[Receive HTTP Reponse]
+
+   c1-->p1-->s1
+   s2-->p2-->c2
    subgraph Client
-       c1
-       c2
+       c1[Send HTTP Request]
+       c2[Receive HTTP Reponse]
    end
    subgraph Proxy
-       p1
-       p2
+       p1[Forward HTTP Request]
+       p2[Foward HTTP Reponse]
    end
-   subgraph API Server
-       s1
-       s2
+   subgraph API-Server
+       s1[Receive HTTP Request]-->s2[Send HTTP Response]
    end
 ```
 ## 動作イメージ
